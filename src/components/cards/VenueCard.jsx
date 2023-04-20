@@ -1,19 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Col from "react-bootstrap/Col";
+import styles from "../../styles/recent.module.css";
+
 import Card from "react-bootstrap/Card";
 
 function VenuesCard(props) {
-  const { id, name, media } = props;
+  const { id, media } = props;
   return (
-    <Col className="mb-4">
-      <Card>
-        <div>
-          <img src={media} />
-          <Link to={`props/${id}`}>VIEW</Link>
-        </div>
-      </Card>
-    </Col>
+    <Card>
+      <div>
+        <img src={media} alt="" className={styles.gridImg} />
+        <Link to={`props/${id}`} className={styles.banner}>
+          VIEW
+        </Link>
+      </div>
+    </Card>
   );
 }
 
