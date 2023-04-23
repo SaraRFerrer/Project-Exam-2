@@ -38,7 +38,7 @@ function RecentVenues() {
       <Container fluid>
         <h2>Recently Added Venues</h2>
         <Row className={styles.grid}>
-          {data.slice(0, 4).map((venue) => {
+          {data.slice(0, 8).map((venue) => {
             return (
               <Col
                 xs={12}

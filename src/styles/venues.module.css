@@ -1,0 +1,80 @@
+.grid{
+    padding: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 100px;
+}
+
+.banner {
+    background-image: url("../../venues.header.jpg");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    position: relative;
+}
+
+.searchContainer {
+    position: absolute;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.73);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 50px;
+    width: 600px;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: -7px 18px 36px -6px rgba(0,0,0,0.75);
+}
+
+.button {
+    border: none;
+    color: white;
+    background-color: #1D67D6;
+    padding: 10px 35px 10px 35px;
+    border-radius: 7px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+.button:hover {
+    background-color: #1d67d666;
+}
+
+.searchBar {
+    padding: 12px 100px;
+  border-radius: 6px;
+  color: #6b7280;
+  outline: none;
+  border: 1px solid black;
+}
+
+@media screen and (max-width: 700px) {
+    .searchContainer {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .searchWrapper {
+    position: relative;
+    top: 100%;
+    left: 0;
+    right: 0;
+    
+
+    
+}
+
+.dropdown {
+    background-color: white;
+}
+
+.dropdownItem {
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+  

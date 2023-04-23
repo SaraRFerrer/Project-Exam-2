@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 function VenuesCard(props) {
   const { id, media } = props;
   return (
-    <Card>
+    <Card className={styles.card}>
       <div>
         <img src={media} alt="" className={styles.gridImg} />
         <Link to={`props/${id}`} className={styles.banner}>
