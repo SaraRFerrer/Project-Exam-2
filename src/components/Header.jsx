@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
+import LogIn from "../pages/LogIn/login";
 
 function Navbar() {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleLoginClick = () => {
+    setShowLoginModal(true);
+  };
+
+  const handleCloseLoginModal = () => {
+    setShowLoginModal(false);
+  };
+
   return (
     <nav className="navbar">
       <ul>
@@ -9,7 +21,9 @@ function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/login">Log In</Link>
+          <button className="loginBtn" onClick={handleLoginClick}>
+            Log In
+          </button>
         </li>
         <li>
           <Link to="/register">Register</Link>
@@ -21,6 +35,14 @@ function Navbar() {
           <Link to="/venues">Venues</Link>
         </li>
       </ul>
+      <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Log In</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <LogIn handleClose={handleCloseLoginModal} />
+        </Modal.Body>
+      </Modal>
     </nav>
   );
 }

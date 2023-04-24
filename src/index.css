@@ -41,3 +41,21 @@ nav ul li {
 .navbar li a:hover {
   color: #9B1212;
 }
+
+footer {
+  background-color: #747272;
+  height: 100px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.footerText {
+  color: #9B1212;
+  font-size: 1.2rem;
+}
+
+.loginBtn{
+  border: none;
+  background-color: #747272;
+  color: white;
+}

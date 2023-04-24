@@ -1,0 +1,32 @@
+.bannerContainer {
+    position: relative;
+}
+
+
+
+.homeBanner {
+    background-image: url("../../homeBanner.jpg");
+    background-repeat: no-repeat;
+    width: 90%;
+    margin: 0 auto;
+    height: 400px;
+    background-size: cover;
+    position: relative;
+}
+
+.bannerBtn {
+    border: none;
+    background-color: #1d67d66c;
+    padding: 10px 35px 10px 35px;
+    border-radius: 7px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
+
+.bannerBtn:hover {
+    background-color: #1d67d6;
+}
