@@ -20,6 +20,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="profile" element={<Profile />} />
         <Route path="venues" element={<Venues />} />
+        <Route path="specific/:id" element={<Venue />} />
         <Route path="*" element={<RouteNotFound />} />
       </Route>
     </Routes>

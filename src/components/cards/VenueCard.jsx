@@ -10,7 +10,7 @@ function VenuesCard(props) {
     <Card className={styles.card}>
       <div>
         <img src={media} alt="" className={styles.gridImg} />
-        <Link to={`props/${id}`} className={styles.banner}>
+        <Link to={`/specific/${id}`} className={styles.banner}>
           VIEW
         </Link>
       </div>
