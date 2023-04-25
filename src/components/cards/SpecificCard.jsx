@@ -7,6 +7,7 @@ import HandleBooking from "../../pages/specific/book";
 
 function SpecificCard(props) {
   const { media, name, description, price, meta, owner, bookings } = props;
+  const [bookingStatus, setBookingStatus] = useState("");
 
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
@@ -35,7 +36,7 @@ function SpecificCard(props) {
     });
   }
 
-  function handleCheckAvailability() {
+  async function handleCheckAvailability() {
     if (!checkinDate || !checkoutDate) {
       alert("Please select both check-in and check-out dates.");
       return;
@@ -107,19 +108,26 @@ function SpecificCard(props) {
       </div>
 
       <div className={styles.bookContainer}>
-  <button className={styles.venueBtn} onClick={() => HandleBooking(false)}>
-    Book Venue
-  </button>
-  {bookingStatus === 'unavailable' && (
-    <p className={styles.errorMsg}>This venue is not available for the selected dates.</p>
-  )}
-  {bookingStatus === 'success' && (
-    <p className={styles.successMsg}>Booking successful!</p>
-  )}
-  {bookingStatus === 'error' && (
-    <p className={styles.errorMsg}>There was an error processing your booking. Please try again.</p>
-  )}
-</div>
+        <button
+          className={styles.venueBtn}
+          onClick={() => HandleBooking(false)}
+        >
+          Book Venue
+        </button>
+        {bookingStatus === "unavailable" && (
+          <p className={styles.errorMsg}>
+            This venue is not available for the selected dates.
+          </p>
+        )}
+        {bookingStatus === "success" && (
+          <p className={styles.successMsg}>Booking successful!</p>
+        )}
+        {bookingStatus === "error" && (
+          <p className={styles.errorMsg}>
+            There was an error processing your booking. Please try again.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

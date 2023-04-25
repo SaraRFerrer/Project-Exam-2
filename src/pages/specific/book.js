@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function HandleBooking({ id, checkinDate, checkoutDate }) {
+function HandleBooking({ id, checkinDate, checkoutDate, isAvailable }) {
   const [bookingStatus, setBookingStatus] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
