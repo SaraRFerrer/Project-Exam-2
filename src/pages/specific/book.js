@@ -11,12 +11,13 @@ function HandleBooking({ id, checkinDate, checkoutDate, isAvailable }) {
   }
 
   async function handleBooking() {
-    if (isAvailable) {
+    if (user && isAvailable) {
       try {
-        const response = await fetch("/api/bookings", {
+        const response = await fetch("https://api.noroff.dev/api/v1/holidaze/bookings", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+              Authorization: "Bearer " + user.token,
           },
           body: JSON.stringify({
             venueId: id,

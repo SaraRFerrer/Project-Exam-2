@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { schemaReg } from "../../components/SchemaReg";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,18 +6,43 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "../../styles/register.module.css";
 
 function Register() {
-  const alert = () => {
-    toast.success("Registration was successful !", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  };
+  const [showAlert, setShowAlert] = useState(false);
 
   const initialValues = { name: "", email: "", avatar: "", password: "" };
+
+  const handleSubmit = async (values) => {
+    try {
+      const response = await fetch("https://api.noroff.dev/api/v1/holidaze/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setShowAlert(true);
+        toast.success('Registration was successful!', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        console.log(data);
+      } else {
+        toast.error('Registration failed', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        console.error(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Formik
       validationSchema={schemaReg}
-      onSubmit={console.log}
+      onSubmit={handleSubmit}
       initialValues={initialValues}
     >
       {(formik) => {
@@ -34,13 +59,13 @@ function Register() {
                   <Field
                     className={styles.input}
                     type="text"
-                    name="fullName"
+                    name="name"
                     placeholder="Enter your full name"
-                    value={values.fullName}
+                    value={values.name}
                     readOnly={false}
                   />
                   <ErrorMessage
-                    name="fullName"
+                    name="name"
                     component="span"
                     className="error"
                   />
@@ -67,13 +92,13 @@ function Register() {
                   <Field
                     className={styles.input}
                     type="text"
-                    name="subject"
+                    name="avatar"
                     placeholder="Enter a valid Url"
-                    value={values.subject}
+                    value={values.avatar}
                     readOnly={false}
                   />
                   <ErrorMessage
-                    name="subject"
+                    name="avatar"
                     component="span"
                     className="error"
                   />
@@ -83,13 +108,13 @@ function Register() {
                   <Field
                     className={styles.input}
                     type="text"
-                    name="message"
+                    name="password"
                     placeholder="Enter new Password"
-                    value={values.message}
+                    value={values.password}
                     readOnly={false}
                   />
                   <ErrorMessage
-                    name="message"
+                    name="password"
                     component="span"
                     className="error"
                   />
@@ -98,14 +123,13 @@ function Register() {
                 <button
                   type="submit"
                   className={styles.formBtn}
-                  onClick={() => {
-                    alert();
-                  }}
+                
                 >
                   Submit
                 </button>
-                <ToastContainer position="top-right" autoClose={5000} />
+               
               </Form>
+              <ToastContainer position="top-right" autoClose={5000} />
             </div>
           </div>
         );
