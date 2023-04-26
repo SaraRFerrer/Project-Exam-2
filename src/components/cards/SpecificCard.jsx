@@ -55,9 +55,12 @@ function SpecificCard(props) {
         (checkoutDate >= bookingStart && checkoutDate <= bookingEnd)
       );
     });
-
     if (isAvailable) {
-      await HandleBooking(isAvailable);
+      const bookingStatus = await HandleBooking({
+        startDate: checkinDate,
+        endDate: checkoutDate,
+      });
+      setBookingStatus(bookingStatus);
     } else {
       alert("The venue is not available for the selected dates.");
     }
@@ -110,7 +113,10 @@ function SpecificCard(props) {
       <div className={styles.bookContainer}>
         <button
           className={styles.venueBtn}
-          onClick={() => HandleBooking(false)}
+          onClick={async () => {
+            const bookingStatus = await HandleBooking(false);
+            setBookingStatus(bookingStatus);
+          }}
         >
           Book Venue
         </button>

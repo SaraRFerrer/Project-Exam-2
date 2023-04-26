@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "../../styles/venue.module.css";
 
 function HandleBooking({ id, checkinDate, checkoutDate, isAvailable }) {
   const [bookingStatus, setBookingStatus] = useState("");
@@ -6,7 +7,7 @@ function HandleBooking({ id, checkinDate, checkoutDate, isAvailable }) {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
     window.location.href = "/login";
-    return;
+    return null;
   }
 
   async function handleBooking() {
@@ -37,7 +38,11 @@ function HandleBooking({ id, checkinDate, checkoutDate, isAvailable }) {
     }
   }
 
-  return handleBooking;
+  return (
+    <button className={styles.venueBtn} onClick={handleBooking}>
+      Book Venue
+    </button>
+  );
 }
 
 export default HandleBooking;
