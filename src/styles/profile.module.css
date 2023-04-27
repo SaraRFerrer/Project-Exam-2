@@ -1,0 +1,17 @@
+h1 {
+  text-align: center;
+}
+
+.avatarContainer {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.avatar {
+  text-align: center;
+}
+
+.username {
+  text-align: center;
+  font-size: 1.2rem;
+}
