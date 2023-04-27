@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "./avatar";
 import Bookings from "./bookings";
+import CreateVenue from "./create";
 import styles from "../../styles/profile.module.css";
 
 function Profile() {
@@ -9,6 +10,7 @@ function Profile() {
       <h1>Profile Page </h1>
       <Avatar />
       <Bookings />
+      <CreateVenue />
     </div>
   );
 }
