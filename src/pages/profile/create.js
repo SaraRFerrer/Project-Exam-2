@@ -9,8 +9,9 @@ function CreateVenue() {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [guests, setGuests] = useState("");
-  const [availableFrom, setAvailableFrom] = useState("");
+  const [maxGuests, setMaxGuests] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
   const [animals, setAnimals] = useState(false);
   const [breakfast, setBreakfast] = useState(false);
   const [parking, setParking] = useState(false);
@@ -24,16 +25,19 @@ function CreateVenue() {
     const data = {
       name,
       description,
-      price,
+      price: parseInt(price),
       animals,
       breakfast,
       parking,
       wifi,
+      dateTo,
+      dateFrom,
+      maxGuests: parseInt(maxGuests),
     };
 
     try {
       const response = await fetch(
-        "https://api.noroff.dev/api/v1/holidaze/bookings",
+        "https://api.noroff.dev/api/v1/holidaze/venues",
         {
           method: "POST",
           headers: {
@@ -46,6 +50,11 @@ function CreateVenue() {
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
+      }
+      console.log(response.status);
+      if (response.status === 403) {
+        alert("Become a Venue Manager to create a new Venue");
+        return;
       }
 
       const result = await response.json();
@@ -117,8 +126,8 @@ function CreateVenue() {
               <Form.Control
                 type="number"
                 placeholder="Enter Max Guests"
-                value={guests}
-                onChange={(event) => setGuests(event.target.value)}
+                value={maxGuests}
+                onChange={(event) => setMaxGuests(event.target.value)}
               />
             </Form.Group>
             <Form.Group>
@@ -126,8 +135,18 @@ function CreateVenue() {
                 Available from:
                 <input
                   type="date"
-                  value={availableFrom}
-                  onChange={(event) => setAvailableFrom(event.target.value)}
+                  value={dateFrom}
+                  onChange={(event) => setDateFrom(event.target.value)}
+                />
+              </label>
+            </Form.Group>
+            <Form.Group>
+              <label>
+                Available To:
+                <input
+                  type="date"
+                  value={dateTo}
+                  onChange={(event) => setDateTo(event.target.value)}
                 />
               </label>
             </Form.Group>

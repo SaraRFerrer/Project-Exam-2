@@ -1,10 +1,13 @@
 h1 {
   text-align: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 .avatarContainer {
   margin: 0 auto;
   text-align: center;
+  position: relative;
 }
 
 .avatar {
@@ -36,6 +39,21 @@ h1 {
   font-size: 1.1rem;
 }
 
-.modal {
-  min-width: 60%;
+.bookings {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+.editIcon {
+  cursor: pointer;
+  position: absolute;
+}
+
+.avatar {
+  max-width: 200px;
+  position: relative;
 }

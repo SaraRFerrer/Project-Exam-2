@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "../../styles/profile.module.css";
 
 function Bookings() {
   const [bookings, setBookings] = useState([]);
@@ -28,13 +29,21 @@ function Bookings() {
       });
   }, []);
 
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+  };
+
   return (
     <div>
       <h2>Your Bookings</h2>
-      <ul>
+      <ul className={styles.bookings}>
         {bookings.map((booking) => (
           <li key={booking.id}>
-            {booking.date} - {booking.venue}
+            {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
           </li>
         ))}
       </ul>
