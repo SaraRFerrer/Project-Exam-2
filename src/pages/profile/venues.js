@@ -35,7 +35,7 @@ function UserVenues() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.venuesContainer}>
       <h2>Your Venues</h2>
       <Container fluid>
         <Row className={styles.grid}>

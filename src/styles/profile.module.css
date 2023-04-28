@@ -57,3 +57,13 @@ h2 {
   max-width: 200px;
   position: relative;
 }
+
+h2 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.venuesContainer {
+  margin-right: 50px;
+  margin-left: 50px;
+}
