@@ -7,29 +7,42 @@ import styles from "../../styles/register.module.css";
 
 function Register() {
   const [showAlert, setShowAlert] = useState(false);
+  const [venueManager, setVenueManager] = useState(false);
 
-  const initialValues = { name: "", email: "", avatar: "", password: "" };
+  const initialValues = {
+    name: "",
+    email: "",
+    avatar: "",
+    password: "",
+    venueManager: false,
+  };
 
   const handleSubmit = async (values) => {
     try {
-      const response = await fetch("https://api.noroff.dev/api/v1/holidaze/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        "https://api.noroff.dev/api/v1/holidaze/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...values,
+            venueManager: venueManager,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
         setShowAlert(true);
-        toast.success('Registration was successful!', {
+        toast.success("Registration was successful!", {
           position: toast.POSITION.TOP_RIGHT,
         });
         console.log(data);
       } else {
-        toast.error('Registration failed', {
+        toast.error("Registration failed", {
           position: toast.POSITION.TOP_RIGHT,
         });
         console.error(data);
@@ -103,6 +116,24 @@ function Register() {
                     className="error"
                   />
                 </div>
+                <div className={styles.checkContainer}>
+                  <label className={styles.checkLabel}>
+                    Check if you want to become a Venue Manager
+                  </label>
+                  <Field
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="venueManager"
+                    checked={venueManager}
+                    onChange={() => setVenueManager(!venueManager)}
+                    readOnly={false}
+                  />
+                  <ErrorMessage
+                    name="avatar"
+                    component="span"
+                    className="error"
+                  />
+                </div>
                 <div>
                   <label>Password</label>
                   <Field
@@ -120,14 +151,9 @@ function Register() {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className={styles.formBtn}
-                
-                >
+                <button type="submit" className={styles.formBtn}>
                   Submit
                 </button>
-               
               </Form>
               <ToastContainer position="top-right" autoClose={5000} />
             </div>
