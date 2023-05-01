@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 
 function UserVenues() {
   const [venues, setVenues] = useState([]);
+  console.log(venues);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
