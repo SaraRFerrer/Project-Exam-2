@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function EditVenue({ id }) {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function EditVenue({ venueId }) {
+  const [showAlert, setShowAlert] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
@@ -20,8 +24,9 @@ function EditVenue({ id }) {
     const fetchVenue = async () => {
       try {
         const response = await fetch(
-          `https://api.noroff.dev/api/v1/holidaze/venues/${id}`
+          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`
         );
+
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -42,7 +47,7 @@ function EditVenue({ id }) {
       }
     };
     fetchVenue();
-  }, [id]);
+  }, [venueId]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -62,7 +67,7 @@ function EditVenue({ id }) {
 
     try {
       const response = await fetch(
-        `https://api.noroff.dev/api/v1/holidaze/venues/${id}`,
+        `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`,
         {
           method: "PUT",
           headers: {
@@ -73,11 +78,16 @@ function EditVenue({ id }) {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      if (response.ok) {
+        setShowAlert(true);
+        toast.success("Edit was successful!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        const result = await response.json();
+        console.log(result);
+      } else {
+        throw new Error("network response not ok");
       }
-      const result = await response.json();
-      console.log(result);
     } catch (error) {
       console.error("There was a problem with the PUT request:", error);
     }
@@ -192,6 +202,7 @@ function EditVenue({ id }) {
         </Form.Group>
       </Form>
       <Button onClick={handleSubmit}>Save Changes</Button>
+      <ToastContainer />
     </div>
   );
 }

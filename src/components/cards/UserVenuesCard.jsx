@@ -28,7 +28,7 @@ function VenuesCard(props) {
             <Modal.Title>Edit Venue</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <EditVenue handleClose={handleCloseEditModal} />
+            <EditVenue venueId={id} handleClose={handleCloseEditModal} />
           </Modal.Body>
         </Modal>
       </div>
