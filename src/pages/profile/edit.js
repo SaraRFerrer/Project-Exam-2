@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import styles from "../../styles/profile.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -48,6 +48,34 @@ function EditVenue({ venueId }) {
     };
     fetchVenue();
   }, [venueId]);
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this venue?")) {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      try {
+        const response = await fetch(
+          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          setShowAlert(true);
+          toast.success("The venue was deleted successfully!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      } catch (error) {
+        console.error("There was a problem deleting the venue:", error);
+      }
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -202,6 +230,9 @@ function EditVenue({ venueId }) {
         </Form.Group>
       </Form>
       <Button onClick={handleSubmit}>Save Changes</Button>
+      <Button className={styles.deleteBtn} onClick={handleDelete}>
+        Delete Venue
+      </Button>
       <ToastContainer />
     </div>
   );
