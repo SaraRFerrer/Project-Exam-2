@@ -69,7 +69,7 @@ function EditVenue({ venueId }) {
             position: toast.POSITION.TOP_RIGHT,
           });
           setTimeout(() => {
-            location.reload();
+            window.location.reload();
           }, 4000);
         } else {
           throw new Error("Network response was not ok");
@@ -118,7 +118,7 @@ function EditVenue({ venueId }) {
           const result = await response.json();
           console.log(result);
           setTimeout(() => {
-            location.reload();
+            window.location.reload();
           }, 4000);
         } else {
           throw new Error("network response not ok");

@@ -3,6 +3,7 @@ import { FaWifi, FaParking, FaDog, FaUtensils } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../../styles/venue.module.css";
+import { Carousel } from "react-bootstrap";
 
 async function handleBooking({ venueId, dateFrom, dateTo, guests }) {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -59,53 +60,87 @@ function SpecificCard(props) {
       );
     });
   }
+  const unavailableDates = bookings
+    .map((booking) => {
+      const start = new Date(booking.dateFrom);
+      const end = new Date(booking.dateTo);
+      const dates = [];
+      const currentDate = new Date(start);
+      while (currentDate <= end) {
+        dates.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      return dates;
+    })
+    .flat();
+
+  function filterDate(date) {
+    return !unavailableDates.some(
+      (unavailableDate) =>
+        date.getFullYear() === unavailableDate.getFullYear() &&
+        date.getMonth() === unavailableDate.getMonth() &&
+        date.getDate() === unavailableDate.getDate()
+    );
+  }
 
   async function handleCheckAvailability() {
-    if (!checkinDate || !checkoutDate) {
-      alert("Please select both check-in and check-out dates.");
-      return;
-    }
-
-    if (!Array.isArray(bookings)) {
-      alert("Bookings data is not available.");
-      return;
-    }
-
-    const isAvailable = bookings.every((booking) => {
-      const bookingStart = new Date(booking.dateFrom);
-      const bookingEnd = new Date(booking.dateTo);
-      const checkin = new Date(checkinDate);
-      const checkout = new Date(checkoutDate);
-      if (checkin >= bookingStart && checkin <= bookingEnd) {
-        return false;
+    if (
+      window.confirm(
+        "Are you sure you want to book the venue for the selected dates?"
+      )
+    ) {
+      if (!checkinDate || !checkoutDate) {
+        alert("Please select both check-in and check-out dates.");
+        return;
       }
-      if (checkout >= bookingStart && checkout <= bookingEnd) {
-        return false;
+
+      if (!Array.isArray(bookings)) {
+        alert("Bookings data is not available.");
+        return;
       }
-      return true;
-    });
-    if (isAvailable) {
-      const bookingStatus = await handleBooking({
-        venueId,
-        dateFrom: checkinDate,
-        dateTo: checkoutDate,
-        guests: 1,
+
+      const isAvailable = bookings.every((booking) => {
+        const bookingStart = new Date(booking.dateFrom);
+        const bookingEnd = new Date(booking.dateTo);
+        const checkin = new Date(checkinDate);
+        const checkout = new Date(checkoutDate);
+        if (checkin >= bookingStart && checkin <= bookingEnd) {
+          return false;
+        }
+        if (checkout >= bookingStart && checkout <= bookingEnd) {
+          return false;
+        }
+        return true;
       });
-      setBookingStatus(bookingStatus);
-      alert("Venue is Booked");
-    } else {
-      alert("The venue is not available for the selected dates.");
+      if (isAvailable) {
+        const bookingStatus = await handleBooking({
+          venueId,
+          dateFrom: checkinDate,
+          dateTo: checkoutDate,
+          guests: 1,
+        });
+        setBookingStatus(bookingStatus);
+        alert("Venue is Booked");
+      } else {
+        alert("The venue is not available for the selected dates.");
+      }
     }
   }
 
   return (
     <div>
-      <h2>{name}</h2>
-      <div className={styles.imgContainer}>
+      <h2 className={styles.h2}>{name}</h2>
+      <Carousel className={styles.carousel}>
         {media.map((img) => (
-          <img src={img} className={styles.venueImg} />
+          <Carousel.Item key={img}>
+            <img
+              src={img}
+              className={`${styles.venueImg} d-block w-100`}
+              alt={name}
+            />
+          </Carousel.Item>
         ))}
-      </div>
+      </Carousel>
       <div className={styles.desContainer}>
         <p className={styles.des}>{description}</p>
       </div>
@@ -127,6 +162,7 @@ function SpecificCard(props) {
             <DatePicker
               selected={checkinDate}
               onChange={(date) => setCheckinDate(date)}
+              filterDate={filterDate}
             />
           </div>
           <div>
@@ -134,37 +170,13 @@ function SpecificCard(props) {
             <DatePicker
               selected={checkoutDate}
               onChange={(date) => setCheckoutDate(date)}
+              filterDate={filterDate}
             />
           </div>
         </div>
         <button className={styles.venueBtn} onClick={handleCheckAvailability}>
-          Check
-        </button>
-      </div>
-
-      <div className={styles.bookContainer}>
-        <button
-          className={styles.venueBtn}
-          onClick={async () => {
-            const bookingStatus = await handleBooking(false);
-            setBookingStatus(bookingStatus);
-          }}
-        >
           Book Venue
         </button>
-        {bookingStatus === "unavailable" && (
-          <p className={styles.errorMsg}>
-            This venue is not available for the selected dates.
-          </p>
-        )}
-        {bookingStatus === "success" && (
-          <p className={styles.successMsg}>Booking successful!</p>
-        )}
-        {bookingStatus === "error" && (
-          <p className={styles.errorMsg}>
-            There was an error processing your booking. Please try again.
-          </p>
-        )}
       </div>
     </div>
   );
