@@ -68,6 +68,9 @@ function EditVenue({ venueId }) {
           toast.success("The venue was deleted successfully!", {
             position: toast.POSITION.TOP_RIGHT,
           });
+          setTimeout(() => {
+            location.reload();
+          }, 4000);
         } else {
           throw new Error("Network response was not ok");
         }
@@ -93,31 +96,36 @@ function EditVenue({ venueId }) {
       maxGuests: parseInt(maxGuests),
     };
 
-    try {
-      const response = await fetch(
-        `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.accessToken}`,
-          },
-          body: JSON.stringify(data),
-        }
-      );
+    if (window.confirm("Are you sure you want to edit the venue?")) {
+      try {
+        const response = await fetch(
+          `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.accessToken}`,
+            },
+            body: JSON.stringify(data),
+          }
+        );
 
-      if (response.ok) {
-        setShowAlert(true);
-        toast.success("Edit was successful!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        const result = await response.json();
-        console.log(result);
-      } else {
-        throw new Error("network response not ok");
+        if (response.ok) {
+          setShowAlert(true);
+          toast.success("Edit was successful!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          const result = await response.json();
+          console.log(result);
+          setTimeout(() => {
+            location.reload();
+          }, 4000);
+        } else {
+          throw new Error("network response not ok");
+        }
+      } catch (error) {
+        console.error("There was a problem with the PUT request:", error);
       }
-    } catch (error) {
-      console.error("There was a problem with the PUT request:", error);
     }
   };
 
