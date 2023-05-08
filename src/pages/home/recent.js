@@ -21,22 +21,25 @@ function RecentVenues() {
 
   if (isMobile) {
     return (
-      <Carousel className={styles.carousel}>
-        {data.slice(0, 4).map((venue) => {
-          return (
-            <Carousel.Item key={venue.id}>
-              <VenuesCard media={venue.media} id={venue.id} />
-            </Carousel.Item>
-          );
-        })}
-      </Carousel>
+      <div>
+        <h2 className={styles.recentHeading}>Recently Added Venues</h2>
+        <Carousel className={styles.carousel}>
+          {data.slice(0, 4).map((venue) => {
+            return (
+              <Carousel.Item key={venue.id}>
+                <VenuesCard media={venue.media} id={venue.id} />
+              </Carousel.Item>
+            );
+          })}
+        </Carousel>
+      </div>
     );
   }
 
   return (
     <div>
       <Container fluid>
-        <h2>Recently Added Venues</h2>
+        <h2 className={styles.recentHeading}>Recently Added Venues</h2>
         <Row className={styles.grid}>
           {data.slice(0, 8).map((venue) => {
             return (
