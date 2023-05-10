@@ -12,23 +12,29 @@ function LogIn() {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await fetch("https://api.noroff.dev/api/v1/holidaze/auth/login", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
-  
+      const response = await fetch(
+        "https://api.noroff.dev/api/v1/holidaze/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem("user", JSON.stringify(data));
         setShowAlert(true);
-        toast.success('Log In was successful!', {
+        toast.success("Log In was successful!", {
           position: toast.POSITION.TOP_RIGHT,
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
       } else {
-        toast.error('Invalid email or password', {
+        toast.error("Invalid email or password", {
           position: toast.POSITION.TOP_RIGHT,
         });
       }

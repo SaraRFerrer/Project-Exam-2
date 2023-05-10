@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/profile.module.css";
+import { useParams } from "react-router-dom";
 
-function Bookings() {
+function VenueBookings() {
   const [bookings, setBookings] = useState([]);
+  const params = useParams();
   console.log(bookings);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = `https://api.noroff.dev/api/v1/holidaze/profiles/${user.name}/bookings`;
+    const url = `https://api.noroff.dev/api/v1/holidaze/bookings/${params.id}`;
     fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${user.accessToken}`,
+        Authorization: `Bearer`,
       },
     })
       .then((response) => response.json())
@@ -27,7 +28,7 @@ function Bookings() {
         console.error("Error fetching bookings:", error);
         setBookings([]);
       });
-  }, []);
+  }, [params.id]);
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-US", {
@@ -38,17 +39,20 @@ function Bookings() {
   };
 
   return (
-    <div className={styles.bookingsContainer}>
-      <h2 className={styles.bookingsH2}>Your Bookings</h2>
-      <ul className={styles.bookings}>
-        {bookings.map((booking) => (
-          <li key={booking.id}>
-            {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
-          </li>
-        ))}
-      </ul>
+    <div>
+      {bookings.length === 0 ? (
+        <p>No bookings</p>
+      ) : (
+        <ul className={styles.bookings}>
+          {bookings.map((booking) => (
+            <li key={booking.id}>
+              {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
 
-export default Bookings;
+export default VenueBookings;

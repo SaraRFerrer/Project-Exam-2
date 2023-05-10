@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { Modal, Button, Nav, Navbar } from "react-bootstrap";
 import LogIn from "../pages/LogIn/login";
 import { UserContext } from "../context/Context";
+import { useNavigate } from "react-router-dom";
 
 function CustomNavbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { user, setUser } = React.useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const localStoredUser = JSON.parse(localStorage.getItem("user"));
@@ -21,6 +23,7 @@ function CustomNavbar() {
     if (window.confirm("Are you sure you want to log out?")) {
       setUser({ loggedIn: false, venueManager: false });
       localStorage.clear();
+      navigate("/");
     }
   }
 

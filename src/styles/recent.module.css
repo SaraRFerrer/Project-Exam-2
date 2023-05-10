@@ -46,3 +46,14 @@
 button {
   border: none;
 }
+
+.bookingsBtn {
+  color: white;
+  background-color: #1d67d6;
+  padding: 5px;
+  font-size: 1.3rem;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
