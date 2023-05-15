@@ -39,7 +39,7 @@ function Bookings() {
 
   return (
     <div className={styles.bookingsContainer}>
-      <h2 className={styles.bookingsH2}>Your Bookings</h2>
+      <h2 className={styles.bookingsH2}>Your Upcomming Bookings</h2>
       <ul className={styles.bookings}>
         {bookings.map((booking) => (
           <li key={booking.id}>

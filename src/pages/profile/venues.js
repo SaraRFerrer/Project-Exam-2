@@ -37,18 +37,11 @@ function UserVenues() {
 
   return (
     <div className={styles.venuesContainer}>
-      <h2>Your Venues</h2>
+      <h2 className={styles.venuesHeader}>Your Venues</h2>
       <Container fluid>
         <Row className={styles.grid}>
           {venues.map((venue) => (
-            <Col
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              key={venue.id}
-              className="col-12 col-sm-6 col-md-4 col-lg-3"
-            >
+            <Col xs={12} sm={6} md={6} lg={4} key={venue.id}>
               <UserVenuesCard media={venue.media} id={venue.id} />
             </Col>
           ))}

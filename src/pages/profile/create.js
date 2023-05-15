@@ -80,7 +80,7 @@ function CreateVenue() {
         <button
           className={styles.createBtn}
           onClick={() => {
-            if (user.venueManeger === true) {
+            if (user.venueManager === true) {
               console.log("showmodal before", showModal);
               setShowModal(true);
               console.log("showModal after", showModal);
