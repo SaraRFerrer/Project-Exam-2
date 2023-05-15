@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/profile.module.css";
 
 function UpdateVenueManager({ onClose }) {
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const handleUpdate = async (event) => {
-    event.preventDefault();
-
+  const handleUpdate = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     try {
       const response = await fetch(
-        "https://api.noroff.dev/api/v1/holidaze/users/me",
+        `https://api.noroff.dev/api/v1/holidaze/profiles/${user.name}`,
         {
           method: "PUT",
           headers: {
@@ -39,11 +36,7 @@ function UpdateVenueManager({ onClose }) {
   };
 
   return (
-    <Modal
-      className={styles.modal}
-      show={showUpdateModal}
-      onHide={() => setShowUpdateModal(false)}
-    >
+    <Modal show={true} onHide={onClose}>
       <Modal.Header closeButton>
         <Modal.Title>Become a Venue Manager</Modal.Title>
       </Modal.Header>

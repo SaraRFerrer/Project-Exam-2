@@ -3,6 +3,7 @@ import { FiEdit } from "react-icons/fi";
 import styles from "../../styles/profile.module.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import icon from "../../media/profile.png";
 
 function Avatar() {
   const [avatar, setAvatar] = useState("");
@@ -31,10 +32,12 @@ function Avatar() {
     handleClose();
   };
 
+  const avatarImg = avatar || icon;
+
   return (
     <div>
       <div className={styles.avatarContainer}>
-        <img src={avatar} alt="Avatar" className={styles.avatar} />
+        <img src={avatarImg} alt="Avatar" className={styles.avatar} />
         <FiEdit className={styles.editIcon} onClick={handleShow} />
       </div>
       <div>

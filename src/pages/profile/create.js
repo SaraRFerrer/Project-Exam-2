@@ -69,27 +69,34 @@ function CreateVenue() {
       const result = await response.json();
 
       console.log(result);
+      if (response.status === 200) {
+        alert("Venue created successfully!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
+      }
     } catch (error) {
       console.error("There was a problem with the POST request:", error);
+    }
+  };
+
+  const handleModalOpen = () => {
+    if (user && user.role === "venueManager") {
+      setShowModal(true);
+      setShowUpdateModal(false);
+    } else {
+      setShowModal(false);
+      setShowUpdateModal(true);
     }
   };
 
   return (
     <div>
       <div className={styles.createContainer}>
-        <button
-          className={styles.createBtn}
-          onClick={() => {
-            if (user.venueManager === true) {
-              console.log("showmodal before", showModal);
-              setShowModal(true);
-              console.log("showModal after", showModal);
-            } else {
-              setShowUpdateModal(true);
-            }
-          }}
-        >
-          Create New Venue
+        <button className={styles.createBtn} onClick={handleModalOpen}>
+          {user && user.role === "venueManager"
+            ? "Create New Venue"
+            : "Become Venue Manager"}
         </button>
       </div>
       {showModal && (
@@ -99,7 +106,7 @@ function CreateVenue() {
           onHide={() => setShowModal(false)}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Create New Venue</Modal.Title>
+            {user.venueManager ? "Create New Venue" : "Become Venue Manager"}
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
@@ -211,10 +218,7 @@ function CreateVenue() {
         </Modal>
       )}
       {showUpdateModal && (
-        <UpdateVenueManager
-          showUpdateModal={showUpdateModal}
-          setShowUpdateModal={setShowUpdateModal}
-        />
+        <UpdateVenueManager onClose={() => setShowUpdateModal(false)} />
       )}
     </div>
   );
