@@ -1,5 +1,5 @@
 html {
-  font-family: 'Maven Pro', sans-serif;
+  font-family: "Maven Pro", sans-serif;
 }
 
 body {
@@ -11,24 +11,28 @@ h1 {
   margin-bottom: 50px;
 }
 
+h2 {
+  margin-top: 50px;
+  text-align: center;
+}
+
 header {
   height: 70px;
   background-color: #747272;
   display: flex;
   padding: 20px 36px;
-  box-shadow: -1px 15px 32px 3px rgba(0,0,0,0.73);
+  box-shadow: -1px 15px 32px 3px rgba(0, 0, 0, 0.73);
   justify-content: space-between;
 }
 
 h3 {
-  color: #9B1212;
+  color: #9b1212;
 }
 
 nav {
   display: flex;
   margin: 0;
   align-items: center;
-
 }
 
 .navbar a {
@@ -40,11 +44,8 @@ nav {
   background-color: #747272;
 }
 
-
-
-
 .navbar a:hover {
-  color: #9B1212;
+  color: #9b1212;
 }
 
 footer {
@@ -55,13 +56,12 @@ footer {
 }
 
 .footerText {
-  color: #9B1212;
+  color: #9b1212;
   font-size: 1.2rem;
 }
 
-.loginBtn{
+.loginBtn {
   border: none;
   background-color: #747272;
   color: white;
 }
-

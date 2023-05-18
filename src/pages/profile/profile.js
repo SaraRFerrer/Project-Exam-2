@@ -8,7 +8,11 @@ import styles from "../../styles/profile.module.css";
 function Profile() {
   return (
     <div>
-      <h1 className={styles.heading}>Profile Page </h1>
+      <div className={styles.banner}>
+        <div className={styles.headingContainer}>
+          <h1 className={styles.heading}>Profile Page </h1>
+        </div>
+      </div>
       <Avatar />
       <Bookings />
       <CreateVenue />
