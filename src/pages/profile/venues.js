@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function UserVenues() {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [venues, setVenues] = useState([]);
   console.log(venues);
 
@@ -35,20 +36,24 @@ function UserVenues() {
     }
   }, []);
 
-  return (
-    <div className={styles.venuesContainer}>
-      <h2 className={styles.venuesHeader}>Your Venues</h2>
-      <Container fluid>
-        <Row className={styles.grid}>
-          {venues.map((venue) => (
-            <Col xs={12} sm={6} md={6} lg={4} key={venue.id}>
-              <UserVenuesCard media={venue.media} id={venue.id} />
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </div>
-  );
+  if (user && user.venueManager) {
+    return (
+      <div className={styles.venuesContainer}>
+        <h2 className={styles.venuesHeader}>Your Venues</h2>
+        <Container fluid>
+          <Row className={styles.grid}>
+            {venues.map((venue) => (
+              <Col xs={12} sm={6} md={6} lg={4} key={venue.id}>
+                <UserVenuesCard media={venue.media} id={venue.id} />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </div>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default UserVenues;
