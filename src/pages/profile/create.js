@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/profile.module.css";
-import UpdateVenueManager from "./venueManager";
 
 function CreateVenue() {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +17,6 @@ function CreateVenue() {
   const [breakfast, setBreakfast] = useState(false);
   const [parking, setParking] = useState(false);
   const [wifi, setWifi] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -79,35 +78,23 @@ function CreateVenue() {
       console.error("There was a problem with the POST request:", error);
     }
   };
-
-  const handleModalOpen = () => {
-    if (user && user.role === "venueManager") {
-      setShowModal(true);
-      setShowUpdateModal(false);
-    } else {
-      setShowModal(false);
-      setShowUpdateModal(true);
-    }
-  };
-
-  return (
-    <div>
-      <div className={styles.createContainer}>
-        <button className={styles.createBtn} onClick={handleModalOpen}>
-          {user && user.role === "venueManager"
-            ? "Create New Venue"
-            : "Become Venue Manager"}
-        </button>
-      </div>
-      {showModal && (
+  if (user && user.venueManager) {
+    return (
+      <div>
+        <div className={styles.createContainer}>
+          <button
+            className={styles.createBtn}
+            onClick={() => setShowModal(true)}
+          >
+            Create New Venue
+          </button>
+        </div>
         <Modal
           className={styles.modal}
           show={showModal}
           onHide={() => setShowModal(false)}
         >
-          <Modal.Header closeButton>
-            {user.venueManager ? "Create New Venue" : "Become Venue Manager"}
-          </Modal.Header>
+          <Modal.Header closeButton>Create New Venue</Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="name">
@@ -216,12 +203,25 @@ function CreateVenue() {
             <Button onClick={handleSubmit}>Create Venue</Button>
           </Modal.Body>
         </Modal>
-      )}
-      {showUpdateModal && (
-        <UpdateVenueManager onClose={() => setShowUpdateModal(false)} />
-      )}
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <div className={styles.createContainer}>
+          <p>
+            Become a VenueManager by registering as a new user. VenueManagers
+            can create and manage venues!
+          </p>
+          <Link to="/register">
+            <button className={styles.createBtn} onClick={showModal}>
+              Register
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default CreateVenue;

@@ -55,6 +55,10 @@
       width: 100%;
       max-width: 100%;
     }
+
+    .searchBar {
+        padding: 12px 70px;
+    }
   }
 
   .searchWrapper {
@@ -62,10 +66,10 @@
     top: 100%;
     left: 0;
     right: 0;
-    
-
-    
 }
+
+
+
 
 .dropdown {
     background-color: white;
