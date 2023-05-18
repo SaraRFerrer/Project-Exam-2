@@ -1,3 +1,4 @@
+import React from "react";
 import ApiHook from "../../hooks/apiHook";
 import VenuesCard from "../../components/cards/VenueCard";
 import Container from "react-bootstrap/Container";
