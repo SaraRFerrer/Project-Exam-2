@@ -7,6 +7,7 @@ import styles from "../../styles/register.module.css";
 
 function Register() {
   const [showAlert, setShowAlert] = useState(false);
+  console.log(showAlert);
   const [venueManager, setVenueManager] = useState(false);
 
   const initialValues = {

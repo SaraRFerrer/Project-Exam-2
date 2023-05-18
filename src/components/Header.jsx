@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Modal, Button, Nav, Navbar } from "react-bootstrap";
+import { Modal, Nav, Navbar } from "react-bootstrap";
 import LogIn from "../pages/LogIn/login";
 import { UserContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ function CustomNavbar() {
         ? { loggedIn: true, venueManager: localStoredUser.isVenueManager }
         : { loggedIn: false, venueManager: false }
     );
-  }, []);
+  }, [setUser]);
 
   function logout() {
     if (window.confirm("Are you sure you want to log out?")) {

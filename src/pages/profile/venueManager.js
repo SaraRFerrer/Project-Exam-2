@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "../../styles/profile.module.css";
 
 function UpdateVenueManager({ onClose }) {
   const handleUpdate = async () => {
