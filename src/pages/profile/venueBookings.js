@@ -4,16 +4,18 @@ import { useParams } from "react-router-dom";
 
 function VenueBookings() {
   const [bookings, setBookings] = useState([]);
-  const params = useParams();
+  const { venueId } = useParams();
+
   console.log(bookings);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    const url = `https://api.noroff.dev/api/v1/holidaze/bookings/${params.id}`;
+    const url = `https://api.noroff.dev/api/v1/holidaze/bookings/${venueId}`;
     fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer`,
+        Authorization: `Bearer ${user.accessToken}`,
       },
     })
       .then((response) => response.json())
@@ -28,7 +30,7 @@ function VenueBookings() {
         console.error("Error fetching bookings:", error);
         setBookings([]);
       });
-  }, [params.id]);
+  }, [venueId]);
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-US", {

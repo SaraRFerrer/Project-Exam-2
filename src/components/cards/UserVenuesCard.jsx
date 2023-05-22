@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 
 function VenuesCard(props) {
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showBookingsDropdown, setShowBookingsDropdown] = useState(false);
+  const [showBookings, setShowBookings] = useState(false);
 
   const handleEditClick = () => {
     setShowEditModal(true);
@@ -18,8 +18,13 @@ function VenuesCard(props) {
   };
 
   const handleBookingsClick = () => {
-    setShowBookingsDropdown(!showBookingsDropdown);
+    setShowBookings(true);
   };
+
+  const handleBookingsClose = () => {
+    setShowBookings(false);
+  };
+
   const { id, media } = props;
   return (
     <Card className={styles.card}>
@@ -28,21 +33,17 @@ function VenuesCard(props) {
         <button className={styles.banner} onClick={handleEditClick}>
           Manage
         </button>
-        <Dropdown>
-          <Dropdown.Toggle
-            variant="primary"
-            id={`bookings-dropdown-${id}`}
-            className={styles.bookingsBtn}
-            onClick={handleBookingsClick}
-          >
-            Bookings
-          </Dropdown.Toggle>
-          <Dropdown.Menu show={showBookingsDropdown}>
-            <Dropdown.Item>
-              <VenueBookings venueId={id} />
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <button className={styles.bookingsBtn} onClick={handleBookingsClick}>
+          Bookings
+        </button>
+        <Modal show={showBookings} onHide={handleBookingsClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Bookings</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <VenueBookings venueId={id} handleClose={handleBookingsClose} />
+          </Modal.Body>
+        </Modal>
 
         <Modal show={showEditModal} onHide={handleCloseEditModal}>
           <Modal.Header closeButton>

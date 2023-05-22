@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/profile.module.css";
+import BookingsCard from "../../components/cards/BookingCard";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function Bookings() {
   const [bookings, setBookings] = useState([]);
@@ -7,7 +11,7 @@ function Bookings() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    const url = `https://api.noroff.dev/api/v1/holidaze/profiles/${user.name}/bookings`;
+    const url = `https://api.noroff.dev/api/v1/holidaze/profiles/${user.name}/bookings?_venue=true`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -29,24 +33,23 @@ function Bookings() {
       });
   }, []);
 
-  const formatDate = (date) => {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    });
-  };
-
   return (
     <div className={styles.bookingsContainer}>
-      <h2 className={styles.bookingsH2}>Your Upcomming Bookings</h2>
-      <ul className={styles.bookings}>
-        {bookings.map((booking) => (
-          <li key={booking.id}>
-            {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
-          </li>
-        ))}
-      </ul>
+      <h2 className={styles.bookingsH2}>Your Upcoming Bookings</h2>
+      <Container fluid>
+        <Row className={styles.grid}>
+          {bookings.map((venue) => (
+            <Col xs={12} sm={6} md={4} lg={3} key={venue.id}>
+              <BookingsCard
+                media={venue.media}
+                id={venue.id}
+                dateTo={venue.dateTo}
+                dateFrom={venue.dateFrom}
+              />
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </div>
   );
 }

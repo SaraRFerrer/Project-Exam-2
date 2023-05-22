@@ -32,7 +32,8 @@ async function handleBooking({ venueId, dateFrom, dateTo, guests }) {
 
 function SpecificCard(props) {
   const { venueId, venue } = props;
-  const { media, name, description, price, meta, owner, bookings } = venue;
+  const { media, name, description, price, meta, owner, bookings, location } =
+    venue;
   const [bookingStatus, setBookingStatus] = useState("");
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
@@ -177,6 +178,12 @@ function SpecificCard(props) {
         <button className={styles.venueBtn} onClick={handleCheckAvailability}>
           Book Venue
         </button>
+      </div>
+      <div className={styles.locationContainer}>
+        <h3>Location</h3>
+        <p>Country: {location.country}</p>
+        <p>City: {location.city}</p>
+        <p>Address: {location.address}</p>
       </div>
     </div>
   );

@@ -17,6 +17,11 @@ function CreateVenue() {
   const [breakfast, setBreakfast] = useState(false);
   const [parking, setParking] = useState(false);
   const [wifi, setWifi] = useState(false);
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  const [continent, setContinent] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -41,6 +46,11 @@ function CreateVenue() {
       dateTo,
       dateFrom,
       maxGuests: parseInt(maxGuests),
+      city,
+      address,
+      continent,
+      country,
+      zip,
     };
 
     try {
@@ -164,6 +174,57 @@ function CreateVenue() {
                   />
                 </label>
               </Form.Group>
+              <div>
+                <Form.Group controlId="city">
+                  <Form.Label>City</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter City"
+                    value={city}
+                    onChange={(event) => setCity(event.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="address">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Address"
+                    value={address}
+                    onChange={(event) => setAddress(event.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="continent">
+                  <Form.Label>Continent</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Continent"
+                    value={continent}
+                    onChange={(event) => setContinent(event.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="country">
+                  <Form.Label>Country</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Country"
+                    value={country}
+                    onChange={(event) => setCountry(event.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="zip">
+                  <Form.Label>Zip Code</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Zip Code"
+                    value={zip}
+                    onChange={(event) => setZip(event.target.value)}
+                  />
+                </Form.Group>
+              </div>
 
               <Form.Group controlId="animals">
                 <Form.Check
