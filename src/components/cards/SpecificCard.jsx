@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaWifi, FaParking, FaDog, FaUtensils } from "react-icons/fa";
+import { FaWifi, FaParking, FaDog, FaUtensils, FaBed } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../../styles/venue.module.css";
@@ -32,8 +32,17 @@ async function handleBooking({ venueId, dateFrom, dateTo, guests }) {
 
 function SpecificCard(props) {
   const { venueId, venue } = props;
-  const { media, name, description, price, meta, owner, bookings, location } =
-    venue;
+  const {
+    media,
+    name,
+    description,
+    price,
+    meta,
+    owner,
+    bookings,
+    location,
+    maxGuests,
+  } = venue;
   const [bookingStatus, setBookingStatus] = useState("");
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
@@ -144,6 +153,9 @@ function SpecificCard(props) {
       </Carousel>
       <div className={styles.desContainer}>
         <p className={styles.des}>{description}</p>
+      </div>
+      <div className={styles.guests}>
+        <FaBed /> {maxGuests}
       </div>
       <div>
         <p className={styles.price}>

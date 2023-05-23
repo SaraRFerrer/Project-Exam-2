@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/profile.module.css";
-import { useParams } from "react-router-dom";
 
-function VenueBookings() {
+function VenueBookings({ venueId }) {
   const [bookings, setBookings] = useState([]);
-  const { venueId } = useParams();
 
   console.log(bookings);
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    const url = `https://api.noroff.dev/api/v1/holidaze/bookings/${venueId}`;
+    const url = `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}/?_bookings_true`;
     fetch(url, {
       method: "GET",
       headers: {

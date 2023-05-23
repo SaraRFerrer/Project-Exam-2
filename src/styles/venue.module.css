@@ -86,3 +86,12 @@ h2 {
   margin: 0 auto;
   margin-top: 40px;
 }
+
+.guests {
+  text-align: center;
+  color: red;
+}
+
+.guests img {
+  width: 50px;
+}

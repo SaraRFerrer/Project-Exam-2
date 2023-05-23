@@ -30,3 +30,14 @@
 .bannerBtn:hover {
     background-color: #1d67d6;
 }
+
+.container {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.container p {
+    max-width: 500px;
+    margin: 0 auto;
+}

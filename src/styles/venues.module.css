@@ -73,6 +73,15 @@
 
 .dropdown {
     background-color: white;
+    position: absolute;
+    top: 10;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    border: 1px solid #cccccc;
+    overflow-y: auto;
+    max-height: 150px;
+    
 }
 
 .dropdownItem {
@@ -80,5 +89,7 @@
     cursor: pointer;
 }
 
-
+.dropdownItem:hover {
+    color:  #9b1212;
+}
   

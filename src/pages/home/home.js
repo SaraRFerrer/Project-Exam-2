@@ -7,6 +7,14 @@ function Home() {
   return (
     <div>
       <RecentVenues />
+      <div className={styles.container}>
+        <h3>Explore new Destinations</h3>
+        <p>
+          Explore amongst thousands of holiday destinations. Holidaze offers a
+          wide range of accommodations to fit your needs. Search through
+          everything from Hotels, Apartments, Resorts to Houses.
+        </p>
+      </div>
       <div className={styles.bannerContainer}>
         <div className={styles.homeBanner}>
           <h2>FIND YOUR VENUE</h2>
