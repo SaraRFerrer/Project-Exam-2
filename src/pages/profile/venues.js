@@ -13,7 +13,7 @@ function UserVenues() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      const url = `https://api.noroff.dev/api/v1/holidaze/profiles/${user.name}/venues/?_bookings_true`;
+      const url = `https://api.noroff.dev/api/v1/holidaze/profiles/${user.name}/venues?_bookings=true`;
       fetch(url, {
         method: "GET",
         headers: {

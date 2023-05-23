@@ -3,8 +3,7 @@ import styles from "../../styles/profile.module.css";
 import Card from "react-bootstrap/Card";
 
 function BookingsCard(props) {
-  const { id, media = [], dateFrom, dateTo } = props;
-  console.log(media);
+  const { id, media, dateFrom, dateTo } = props;
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-US", {
@@ -16,9 +15,8 @@ function BookingsCard(props) {
   return (
     <Card className={styles.bookingsCard}>
       <div>
-        {media.length > 0 && (
-          <img src={media[0]} alt="" className={styles.bookingsImg} />
-        )}
+        <img src={media} alt="" className={styles.bookingsImg} />
+
         <h4 className={styles.bookingsDate}>
           {formatDate(dateFrom)} - {formatDate(dateTo)}
         </h4>

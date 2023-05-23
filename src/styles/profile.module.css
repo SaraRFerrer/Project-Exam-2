@@ -23,7 +23,6 @@
 .avatarContainer {
   margin: 0 auto;
   text-align: center;
-  position: relative;
   margin-top: 50px;
 }
 
@@ -31,6 +30,21 @@
   text-align: center;
   border-radius: 20px;
   box-shadow: -7px 18px 36px -6px rgba(0, 0, 0, 0.75);
+  max-width: 200px;
+}
+
+.editIcon {
+  cursor: pointer;
+  font-size: 2rem;
+ margin-left: 10px;
+}
+
+
+.userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .username {
@@ -71,15 +85,7 @@ h4 {
   margin-top: 10px;
 }
 
-.editIcon {
-  cursor: pointer;
-  position: absolute;
-}
 
-.avatar {
-  max-width: 200px;
-  position: relative;
-}
 
 .bookingsH2,
 .venuesHeader {
@@ -137,4 +143,19 @@ h4 {
 
 .grid {
   justify-content: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #2c2b2b;
+}
+
+th {
+  background-color: #9a9999;
 }

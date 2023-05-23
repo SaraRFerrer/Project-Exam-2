@@ -40,10 +40,15 @@ function Avatar() {
     <div>
       <div className={styles.avatarContainer}>
         <img src={avatarImg} alt="Avatar" className={styles.avatar} />
-        <FiEdit className={styles.editIcon} onClick={handleShow} />
       </div>
+
       <div>
-        <h4 className={styles.username}>{userName}</h4>
+        <div className={styles.userInfo}>
+          <h4 className={styles.username}>{userName}</h4>
+          <span className={styles.editIcon}>
+            <FiEdit onClick={handleShow} />
+          </span>
+        </div>
         <h4 className={styles.username}>{email}</h4>
       </div>
 

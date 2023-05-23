@@ -25,7 +25,9 @@ function VenuesCard(props) {
     setShowBookings(false);
   };
 
-  const { id, media } = props;
+  const { id, media, bookings, dateFrom, dateTo } = props;
+  console.log(bookings);
+
   return (
     <Card className={styles.card}>
       <div>
@@ -41,7 +43,13 @@ function VenuesCard(props) {
             <Modal.Title>Bookings</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <VenueBookings venueId={id} handleClose={handleBookingsClose} />
+            <VenueBookings
+              venueId={id}
+              bookings={bookings}
+              dateFrom={dateFrom}
+              dateTo={dateTo}
+              handleClose={handleBookingsClose}
+            />
           </Modal.Body>
         </Modal>
 

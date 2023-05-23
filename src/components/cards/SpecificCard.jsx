@@ -65,7 +65,7 @@ function SpecificCard(props) {
       const icon = metaIcons[key];
       return (
         <div key={key}>
-          <span>{icon}</span>
+          <span className={styles.icon}>{icon}</span>
         </div>
       );
     });
@@ -139,7 +139,6 @@ function SpecificCard(props) {
 
   return (
     <div>
-      <h2 className={styles.h2}>{name}</h2>
       <Carousel className={styles.carousel}>
         {media.map((img) => (
           <Carousel.Item key={img}>
@@ -151,12 +150,16 @@ function SpecificCard(props) {
           </Carousel.Item>
         ))}
       </Carousel>
+      <div className={styles.heading}>
+        <h2 className={styles.h2}>{name}</h2>
+        <span className={`${styles.icon} ${styles.guests}`}>
+          <FaBed /> {maxGuests}
+        </span>
+      </div>
       <div className={styles.desContainer}>
         <p className={styles.des}>{description}</p>
       </div>
-      <div className={styles.guests}>
-        <FaBed /> {maxGuests}
-      </div>
+
       <div>
         <p className={styles.price}>
           Price per night: <span>${price}</span>

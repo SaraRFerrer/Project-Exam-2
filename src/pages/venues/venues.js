@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 function Venues() {
   const navigate = useNavigate();
   const { data, loading, error } = ApiHook(
-    "https://api.noroff.dev/api/v1/holidaze/venues"
+    "https://api.noroff.dev/api/v1/holidaze/venues?sort=created"
   );
 
   const [search, setSearch] = useState("");

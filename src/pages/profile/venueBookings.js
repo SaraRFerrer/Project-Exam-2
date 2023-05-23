@@ -4,11 +4,10 @@ import styles from "../../styles/profile.module.css";
 function VenueBookings({ venueId }) {
   const [bookings, setBookings] = useState([]);
 
-  console.log(bookings);
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    const url = `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}/?_bookings_true`;
+    const url = `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}/?_bookings=true`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -18,8 +17,10 @@ function VenueBookings({ venueId }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setBookings(data);
+        console.log(data);
+        console.log(data.bookings);
+        if (Array.isArray(data.bookings)) {
+          setBookings(data.bookings);
         } else {
           setBookings([]);
         }
@@ -37,19 +38,30 @@ function VenueBookings({ venueId }) {
       day: "numeric",
     });
   };
-
+  console.log(bookings);
   return (
     <div>
       {bookings.length === 0 ? (
         <p>No bookings</p>
       ) : (
-        <ul className={styles.bookings}>
-          {bookings.map((booking) => (
-            <li key={booking.id}>
-              {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
-            </li>
-          ))}
-        </ul>
+        <table className={styles.bookings}>
+          <thead>
+            <tr>
+              <th>Guests</th>
+              <th>Date From</th>
+              <th>Date To</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((booking) => (
+              <tr key={booking.id}>
+                <th>{booking.guests}</th>
+                <td>{formatDate(booking.dateFrom)}</td>
+                <td>{formatDate(booking.dateTo)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

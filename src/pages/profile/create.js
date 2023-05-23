@@ -92,6 +92,11 @@ function CreateVenue() {
     return (
       <div>
         <div className={styles.createContainer}>
+          <h3>Create a New Venue</h3>
+          <p>
+            As a VenueManager you have the ability to create and rent out your
+            own venues. You will be able to manage your venues.
+          </p>
           <button
             className={styles.createBtn}
             onClick={() => setShowModal(true)}
