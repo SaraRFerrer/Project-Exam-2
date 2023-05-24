@@ -164,3 +164,32 @@ th, td {
 th {
   background-color: #9a9999;
 }
+
+.modalWide {
+  width: 1000px;
+  max-width: none;
+}
+
+@media (max-width: 1000px) {
+  .modalWide{
+    width: 90%;
+  }
+}
+
+label {
+  margin-top: 20px;
+}
+
+.description {
+  height: 200px;
+}
+
+.price {
+  width: 200px;
+}
+
+.dates {
+  display: flex;
+  margin-top: 20px;
+  gap: 50px;
+}

@@ -106,6 +106,7 @@ function CreateVenue() {
         </div>
         <Modal
           className={styles.modal}
+          dialogClassName={styles.modalWide}
           show={showModal}
           onHide={() => setShowModal(false)}
         >
@@ -134,6 +135,7 @@ function CreateVenue() {
               <Form.Group controlId="description">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
+                  className={styles.description}
                   type="text"
                   placeholder="Enter description"
                   value={description}
@@ -144,6 +146,7 @@ function CreateVenue() {
               <Form.Group controlId="price">
                 <Form.Label>Price per night</Form.Label>
                 <Form.Control
+                  className={styles.price}
                   type="number"
                   placeholder="Enter price"
                   value={price}
@@ -153,32 +156,36 @@ function CreateVenue() {
               <Form.Group controlId="guests">
                 <Form.Label>Max Guests</Form.Label>
                 <Form.Control
+                  className={styles.price}
                   type="number"
                   placeholder="Enter Max Guests"
                   value={maxGuests}
                   onChange={(event) => setMaxGuests(event.target.value)}
                 />
               </Form.Group>
-              <Form.Group>
-                <label>
-                  Available from:
-                  <input
-                    type="date"
-                    value={dateFrom}
-                    onChange={(event) => setDateFrom(event.target.value)}
-                  />
-                </label>
-              </Form.Group>
-              <Form.Group>
-                <label>
-                  Available To:
-                  <input
-                    type="date"
-                    value={dateTo}
-                    onChange={(event) => setDateTo(event.target.value)}
-                  />
-                </label>
-              </Form.Group>
+              <h4>Choose Availability</h4>
+              <div className={styles.dates}>
+                <Form.Group>
+                  <label>
+                    Available from:
+                    <input
+                      type="date"
+                      value={dateFrom}
+                      onChange={(event) => setDateFrom(event.target.value)}
+                    />
+                  </label>
+                </Form.Group>
+                <Form.Group>
+                  <label>
+                    Available To:
+                    <input
+                      type="date"
+                      value={dateTo}
+                      onChange={(event) => setDateTo(event.target.value)}
+                    />
+                  </label>
+                </Form.Group>
+              </div>
               <div>
                 <Form.Group controlId="city">
                   <Form.Label>City</Form.Label>

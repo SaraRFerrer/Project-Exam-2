@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <div>
+      <div>
+        <div className={styles.headerBanner}>
+          <h1 className={styles.header}>Find you accommodation at Holidaze!</h1>
+        </div>
+      </div>
       <RecentVenues />
       <div className={styles.container}>
         <h3>Explore new Destinations</h3>
