@@ -8,6 +8,7 @@ import icon from "../../media/profile.png";
 function Avatar() {
   const [avatar, setAvatar] = useState("");
   const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [newAvatarUrl, setNewAvatarUrl] = useState("");
 
@@ -17,6 +18,7 @@ function Avatar() {
     if (storedUser) {
       setAvatar(storedUser.avatar);
       setUserName(storedUser.name);
+      setEmail(storedUser.email);
     }
   }, []);
 
@@ -38,10 +40,16 @@ function Avatar() {
     <div>
       <div className={styles.avatarContainer}>
         <img src={avatarImg} alt="Avatar" className={styles.avatar} />
-        <FiEdit className={styles.editIcon} onClick={handleShow} />
       </div>
+
       <div>
-        <h4 className={styles.username}>{userName}</h4>
+        <div className={styles.userInfo}>
+          <h4 className={styles.username}>{userName}</h4>
+          <span className={styles.editIcon}>
+            <FiEdit onClick={handleShow} />
+          </span>
+        </div>
+        <h4 className={styles.username}>{email}</h4>
       </div>
 
       <Modal show={showModal} onHide={handleClose}>

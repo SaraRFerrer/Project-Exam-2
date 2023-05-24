@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/profile.module.css";
-import UpdateVenueManager from "./venueManager";
 
 function CreateVenue() {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +17,11 @@ function CreateVenue() {
   const [breakfast, setBreakfast] = useState(false);
   const [parking, setParking] = useState(false);
   const [wifi, setWifi] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  const [continent, setContinent] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -42,6 +46,11 @@ function CreateVenue() {
       dateTo,
       dateFrom,
       maxGuests: parseInt(maxGuests),
+      city,
+      address,
+      continent,
+      country,
+      zip,
     };
 
     try {
@@ -79,35 +88,29 @@ function CreateVenue() {
       console.error("There was a problem with the POST request:", error);
     }
   };
-
-  const handleModalOpen = () => {
-    if (user && user.role === "venueManager") {
-      setShowModal(true);
-      setShowUpdateModal(false);
-    } else {
-      setShowModal(false);
-      setShowUpdateModal(true);
-    }
-  };
-
-  return (
-    <div>
-      <div className={styles.createContainer}>
-        <button className={styles.createBtn} onClick={handleModalOpen}>
-          {user && user.role === "venueManager"
-            ? "Create New Venue"
-            : "Become Venue Manager"}
-        </button>
-      </div>
-      {showModal && (
+  if (user && user.venueManager) {
+    return (
+      <div>
+        <div className={styles.createContainer}>
+          <h3>Create a New Venue</h3>
+          <p>
+            As a VenueManager you have the ability to create and rent out your
+            own venues. You will be able to manage your venues.
+          </p>
+          <button
+            className={styles.createBtn}
+            onClick={() => setShowModal(true)}
+          >
+            Create New Venue
+          </button>
+        </div>
         <Modal
           className={styles.modal}
+          dialogClassName={styles.modalWide}
           show={showModal}
           onHide={() => setShowModal(false)}
         >
-          <Modal.Header closeButton>
-            {user.venueManager ? "Create New Venue" : "Become Venue Manager"}
-          </Modal.Header>
+          <Modal.Header closeButton>Create New Venue</Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="name">
@@ -132,6 +135,7 @@ function CreateVenue() {
               <Form.Group controlId="description">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
+                  className={styles.description}
                   type="text"
                   placeholder="Enter description"
                   value={description}
@@ -142,6 +146,7 @@ function CreateVenue() {
               <Form.Group controlId="price">
                 <Form.Label>Price per night</Form.Label>
                 <Form.Control
+                  className={styles.price}
                   type="number"
                   placeholder="Enter price"
                   value={price}
@@ -151,32 +156,87 @@ function CreateVenue() {
               <Form.Group controlId="guests">
                 <Form.Label>Max Guests</Form.Label>
                 <Form.Control
+                  className={styles.price}
                   type="number"
                   placeholder="Enter Max Guests"
                   value={maxGuests}
                   onChange={(event) => setMaxGuests(event.target.value)}
                 />
               </Form.Group>
-              <Form.Group>
-                <label>
-                  Available from:
-                  <input
-                    type="date"
-                    value={dateFrom}
-                    onChange={(event) => setDateFrom(event.target.value)}
+              <h4>Choose Availability</h4>
+              <div className={styles.dates}>
+                <Form.Group>
+                  <label>
+                    Available from:
+                    <input
+                      type="date"
+                      value={dateFrom}
+                      onChange={(event) => setDateFrom(event.target.value)}
+                    />
+                  </label>
+                </Form.Group>
+                <Form.Group>
+                  <label>
+                    Available To:
+                    <input
+                      type="date"
+                      value={dateTo}
+                      onChange={(event) => setDateTo(event.target.value)}
+                    />
+                  </label>
+                </Form.Group>
+              </div>
+              <div>
+                <Form.Group controlId="city">
+                  <Form.Label>City</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter City"
+                    value={city}
+                    onChange={(event) => setCity(event.target.value)}
                   />
-                </label>
-              </Form.Group>
-              <Form.Group>
-                <label>
-                  Available To:
-                  <input
-                    type="date"
-                    value={dateTo}
-                    onChange={(event) => setDateTo(event.target.value)}
+                </Form.Group>
+
+                <Form.Group controlId="address">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Address"
+                    value={address}
+                    onChange={(event) => setAddress(event.target.value)}
                   />
-                </label>
-              </Form.Group>
+                </Form.Group>
+
+                <Form.Group controlId="continent">
+                  <Form.Label>Continent</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Continent"
+                    value={continent}
+                    onChange={(event) => setContinent(event.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="country">
+                  <Form.Label>Country</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Country"
+                    value={country}
+                    onChange={(event) => setCountry(event.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="zip">
+                  <Form.Label>Zip Code</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Zip Code"
+                    value={zip}
+                    onChange={(event) => setZip(event.target.value)}
+                  />
+                </Form.Group>
+              </div>
 
               <Form.Group controlId="animals">
                 <Form.Check
@@ -216,12 +276,25 @@ function CreateVenue() {
             <Button onClick={handleSubmit}>Create Venue</Button>
           </Modal.Body>
         </Modal>
-      )}
-      {showUpdateModal && (
-        <UpdateVenueManager onClose={() => setShowUpdateModal(false)} />
-      )}
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <div className={styles.createContainer}>
+          <p>
+            Become a VenueManager by registering as a new user. VenueManagers
+            can create and manage venues!
+          </p>
+          <Link to="/register">
+            <button className={styles.createBtn} onClick={showModal}>
+              Register
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default CreateVenue;

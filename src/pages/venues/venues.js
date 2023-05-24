@@ -5,10 +5,12 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "../../styles/venues.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Venues() {
+  const navigate = useNavigate();
   const { data, loading, error } = ApiHook(
-    "https://api.noroff.dev/api/v1/holidaze/venues"
+    "https://api.noroff.dev/api/v1/holidaze/venues?sort=created"
   );
 
   const [search, setSearch] = useState("");
@@ -30,6 +32,10 @@ function Venues() {
   const handleSearchInputChange = (e) => {
     setSearch(e.target.value);
     setShowDropdown(e.target.value.length > 0);
+  };
+
+  const handleSearchResultClick = (venueId) => {
+    navigate(`/specific/${venueId}`);
   };
 
   console.log(data);
@@ -55,7 +61,11 @@ function Venues() {
             {showDropdown && (
               <div className={styles.dropdown}>
                 {filteredData.map((venue) => (
-                  <div key={venue.id} className={styles.dropdownItem}>
+                  <div
+                    key={venue.id}
+                    onClick={() => handleSearchResultClick(venue.id)}
+                    className={styles.dropdownItem}
+                  >
                     {venue.name}
                   </div>
                 ))}

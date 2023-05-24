@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FaWifi, FaParking, FaDog, FaUtensils } from "react-icons/fa";
+import { FaWifi, FaParking, FaDog, FaUtensils, FaBed } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../../styles/venue.module.css";
 import { Carousel } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 async function handleBooking({ venueId, dateFrom, dateTo, guests }) {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -32,10 +33,21 @@ async function handleBooking({ venueId, dateFrom, dateTo, guests }) {
 
 function SpecificCard(props) {
   const { venueId, venue } = props;
-  const { media, name, description, price, meta, owner, bookings } = venue;
+  const {
+    media,
+    name,
+    description,
+    price,
+    meta,
+    owner,
+    bookings,
+    location,
+    maxGuests,
+  } = venue;
   const [bookingStatus, setBookingStatus] = useState("");
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
+  const navigate = useNavigate();
 
   if (!Array.isArray(media)) {
     return null;
@@ -55,7 +67,7 @@ function SpecificCard(props) {
       const icon = metaIcons[key];
       return (
         <div key={key}>
-          <span>{icon}</span>
+          <span className={styles.icon}>{icon}</span>
         </div>
       );
     });
@@ -99,6 +111,13 @@ function SpecificCard(props) {
         return;
       }
 
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user || !user.accessToken) {
+        alert("please create a user or log in to book the venue");
+        navigate("/register");
+        return;
+      }
+
       const isAvailable = bookings.every((booking) => {
         const bookingStart = new Date(booking.dateFrom);
         const bookingEnd = new Date(booking.dateTo);
@@ -129,7 +148,6 @@ function SpecificCard(props) {
 
   return (
     <div>
-      <h2 className={styles.h2}>{name}</h2>
       <Carousel className={styles.carousel}>
         {media.map((img) => (
           <Carousel.Item key={img}>
@@ -141,9 +159,16 @@ function SpecificCard(props) {
           </Carousel.Item>
         ))}
       </Carousel>
+      <div className={styles.heading}>
+        <h2 className={styles.h2}>{name}</h2>
+        <span className={`${styles.icon} ${styles.guests}`}>
+          <FaBed /> {maxGuests}
+        </span>
+      </div>
       <div className={styles.desContainer}>
         <p className={styles.des}>{description}</p>
       </div>
+
       <div>
         <p className={styles.price}>
           Price per night: <span>${price}</span>
@@ -177,6 +202,12 @@ function SpecificCard(props) {
         <button className={styles.venueBtn} onClick={handleCheckAvailability}>
           Book Venue
         </button>
+      </div>
+      <div className={styles.locationContainer}>
+        <h3>Location</h3>
+        <p>Country: {location.country}</p>
+        <p>City: {location.city}</p>
+        <p>Address: {location.address}</p>
       </div>
     </div>
   );

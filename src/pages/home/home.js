@@ -6,7 +6,20 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <div>
+      <div>
+        <div className={styles.headerBanner}>
+          <h1 className={styles.header}>Find you accommodation at Holidaze!</h1>
+        </div>
+      </div>
       <RecentVenues />
+      <div className={styles.container}>
+        <h3>Explore new Destinations</h3>
+        <p>
+          Explore amongst thousands of holiday destinations. Holidaze offers a
+          wide range of accommodations to fit your needs. Search through
+          everything from Hotels, Apartments, Resorts to Houses.
+        </p>
+      </div>
       <div className={styles.bannerContainer}>
         <div className={styles.homeBanner}>
           <h2>FIND YOUR VENUE</h2>

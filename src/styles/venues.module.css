@@ -55,6 +55,10 @@
       width: 100%;
       max-width: 100%;
     }
+
+    .searchBar {
+        padding: 12px 70px;
+    }
   }
 
   .searchWrapper {
@@ -62,19 +66,32 @@
     top: 100%;
     left: 0;
     right: 0;
-    
-
-    
 }
+
+
+
 
 .dropdown {
     background-color: white;
+    position: absolute;
+    top: 10;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    border: 1px solid #cccccc;
+    overflow-y: auto;
+    max-height: 150px;
+    
+    
 }
 
 .dropdownItem {
     padding: 10px;
     cursor: pointer;
+    border-bottom: 1px solid #cccccc; 
 }
 
-
+.dropdownItem:hover {
+    color:  #9b1212;
+}
   

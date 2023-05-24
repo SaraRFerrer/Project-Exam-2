@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 
 function VenuesCard(props) {
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showBookingsDropdown, setShowBookingsDropdown] = useState(false);
+  const [showBookings, setShowBookings] = useState(false);
 
   const handleEditClick = () => {
     setShowEditModal(true);
@@ -18,9 +18,15 @@ function VenuesCard(props) {
   };
 
   const handleBookingsClick = () => {
-    setShowBookingsDropdown(!showBookingsDropdown);
+    setShowBookings(true);
   };
-  const { id, media } = props;
+
+  const handleBookingsClose = () => {
+    setShowBookings(false);
+  };
+
+  const { id, media, bookings, dateFrom, dateTo } = props;
+
   return (
     <Card className={styles.card}>
       <div>
@@ -28,21 +34,23 @@ function VenuesCard(props) {
         <button className={styles.banner} onClick={handleEditClick}>
           Manage
         </button>
-        <Dropdown>
-          <Dropdown.Toggle
-            variant="primary"
-            id={`bookings-dropdown-${id}`}
-            className={styles.bookingsBtn}
-            onClick={handleBookingsClick}
-          >
-            Bookings
-          </Dropdown.Toggle>
-          <Dropdown.Menu show={showBookingsDropdown}>
-            <Dropdown.Item>
-              <VenueBookings venueId={id} />
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <button className={styles.bookingsBtn} onClick={handleBookingsClick}>
+          Bookings
+        </button>
+        <Modal show={showBookings} onHide={handleBookingsClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Bookings on your venue</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <VenueBookings
+              venueId={id}
+              bookings={bookings}
+              dateFrom={dateFrom}
+              dateTo={dateTo}
+              handleClose={handleBookingsClose}
+            />
+          </Modal.Body>
+        </Modal>
 
         <Modal show={showEditModal} onHide={handleCloseEditModal}>
           <Modal.Header closeButton>
