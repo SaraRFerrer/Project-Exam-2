@@ -36,7 +36,7 @@ function CustomNavbar() {
   };
 
   return (
-    <Navbar bg="light" expand="md">
+    <Navbar bg="transparent" expand="md" className="hamburger">
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="mr-auto">
