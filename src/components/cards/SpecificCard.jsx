@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../../styles/venue.module.css";
 import { Carousel } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 async function handleBooking({ venueId, dateFrom, dateTo, guests }) {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -46,6 +47,7 @@ function SpecificCard(props) {
   const [bookingStatus, setBookingStatus] = useState("");
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);
+  const navigate = useNavigate();
 
   if (!Array.isArray(media)) {
     return null;
@@ -106,6 +108,13 @@ function SpecificCard(props) {
 
       if (!Array.isArray(bookings)) {
         alert("Bookings data is not available.");
+        return;
+      }
+
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user || !user.accessToken) {
+        alert("please create a user or log in to book the venue");
+        navigate("/register");
         return;
       }
 

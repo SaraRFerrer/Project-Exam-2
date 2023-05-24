@@ -7,7 +7,8 @@ import Col from "react-bootstrap/Col";
 
 function Bookings() {
   const [bookings, setBookings] = useState([]);
-  console.log(bookings);
+  const [media, setMedia] = useState([]);
+  console.log(media);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -23,13 +24,17 @@ function Bookings() {
       .then((data) => {
         if (Array.isArray(data)) {
           setBookings(data);
+          const mediaArray = data.map((item) => item.venue.media);
+          setMedia(mediaArray);
         } else {
           setBookings([]);
+          setMedia([]);
         }
       })
       .catch((error) => {
         console.error("Error fetching bookings:", error);
         setBookings([]);
+        setMedia([]);
       });
   }, []);
 
@@ -41,7 +46,7 @@ function Bookings() {
           {bookings.map((venue) => (
             <Col xs={12} sm={6} md={4} lg={3} key={venue.id}>
               <BookingsCard
-                media={venue.media}
+                media={media}
                 id={venue.id}
                 dateTo={venue.dateTo}
                 dateFrom={venue.dateFrom}

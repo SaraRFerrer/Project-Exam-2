@@ -26,7 +26,6 @@ function VenuesCard(props) {
   };
 
   const { id, media, bookings, dateFrom, dateTo } = props;
-  console.log(bookings);
 
   return (
     <Card className={styles.card}>
@@ -40,7 +39,7 @@ function VenuesCard(props) {
         </button>
         <Modal show={showBookings} onHide={handleBookingsClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Bookings</Modal.Title>
+            <Modal.Title>Bookings on your venue</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <VenueBookings

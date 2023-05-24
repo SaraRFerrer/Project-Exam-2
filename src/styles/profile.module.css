@@ -13,11 +13,13 @@
 }
 
 .banner {
-  background-image: url("../../profileHeader.jpg");
+  background-image: url("../../profileBanner.jpg");
   background-repeat: no-repeat;
-  min-height: 50vh;
-  background-size: cover;
+ min-height: 50vh;
+ width: 100%;
+  object-fit: cover;
   position: relative;
+  box-shadow: -7px 18px 36px -6px rgba(0, 0, 0, 0.75);
 }
 
 .avatarContainer {
@@ -123,6 +125,9 @@ h4 {
   bottom: 0;
   left: 0;
   right: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #9b1212;
 }
 
 .bookingsCard {
