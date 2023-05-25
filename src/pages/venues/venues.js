@@ -87,7 +87,12 @@ function Venues() {
                 key={venue.id}
                 className="col-12 col-sm-6 col-md-4 col-lg-3"
               >
-                <VenuesCard media={venue.media} id={venue.id} />
+                <VenuesCard
+                  media={venue.media}
+                  id={venue.id}
+                  price={venue.price}
+                  maxGuests={venue.maxGuests}
+                />
               </Col>
             );
           })}

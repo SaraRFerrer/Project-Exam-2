@@ -15,8 +15,8 @@
 .banner {
   background-image: url("../../profileBanner.jpg");
   background-repeat: no-repeat;
- min-height: 50vh;
- width: 100%;
+  min-height: 50vh;
+  width: 100%;
   object-fit: cover;
   position: relative;
   box-shadow: -7px 18px 36px -6px rgba(0, 0, 0, 0.75);
@@ -38,9 +38,8 @@
 .editIcon {
   cursor: pointer;
   font-size: 2rem;
- margin-left: 10px;
+  margin-left: 10px;
 }
-
 
 .userInfo {
   display: flex;
@@ -62,6 +61,12 @@
   padding: 50px;
   border-radius: 20px;
   box-shadow: -7px 18px 36px -6px rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 400px) {
+  .createContainer {
+    width: 80%;
+  }
 }
 
 .createBtn {
@@ -86,8 +91,6 @@
 h4 {
   margin-top: 10px;
 }
-
-
 
 .bookingsH2,
 .venuesHeader {
@@ -155,7 +158,8 @@ table {
   width: 100%;
 }
 
-th, td {
+th,
+td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #2c2b2b;
@@ -171,11 +175,11 @@ th {
 }
 
 @media (max-width: 1000px) {
-  .modalWide{
+  .modalWide {
     width: 90%;
   }
 
-  .heading{
+  .heading {
     width: 80%;
   }
 }

@@ -82,7 +82,7 @@ function Register() {
                     <ErrorMessage
                       name="name"
                       component="span"
-                      className="error"
+                      className={styles.error}
                     />
                   </div>
 
@@ -99,7 +99,7 @@ function Register() {
                     <ErrorMessage
                       name="email"
                       component="span"
-                      className="error"
+                      className={styles.error}
                     />
                   </div>
                   <div>
@@ -115,7 +115,7 @@ function Register() {
                     <ErrorMessage
                       name="avatar"
                       component="span"
-                      className="error"
+                      className={styles.error}
                     />
                   </div>
                   <div className={styles.checkContainer}>
@@ -133,14 +133,14 @@ function Register() {
                     <ErrorMessage
                       name="avatar"
                       component="span"
-                      className="error"
+                      className={styles.error}
                     />
                   </div>
                   <div>
                     <label>Password</label>
                     <Field
                       className={styles.input}
-                      type="text"
+                      type="password"
                       name="password"
                       placeholder="Enter new Password"
                       value={values.password}
@@ -149,7 +149,7 @@ function Register() {
                     <ErrorMessage
                       name="password"
                       component="span"
-                      className="error"
+                      className={styles.error}
                     />
                   </div>
 

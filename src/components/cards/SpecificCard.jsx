@@ -61,15 +61,17 @@ function SpecificCard(props) {
   };
 
   let renderedMeta = null;
-
   if (meta && Object.keys(meta).length > 0) {
     renderedMeta = Object.entries(meta).map(([key, value]) => {
-      const icon = metaIcons[key];
-      return (
-        <div key={key}>
-          <span className={styles.icon}>{icon}</span>
-        </div>
-      );
+      if (value) {
+        const icon = metaIcons[key];
+        return (
+          <div key={key}>
+            <span className={styles.icon}>{icon}</span>
+          </div>
+        );
+      }
+      return null;
     });
   }
   const unavailableDates = bookings
