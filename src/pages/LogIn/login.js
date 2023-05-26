@@ -5,10 +5,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../../styles/login.module.css";
 import { Button, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function LogIn() {
   const initialValues = { email: "", password: "" };
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
     try {
@@ -80,7 +82,7 @@ function LogIn() {
                   <label>Password</label>
                   <Field
                     className={styles.input}
-                    type="text"
+                    type="password"
                     name="password"
                     placeholder="Enter your Password"
                     readOnly={false}

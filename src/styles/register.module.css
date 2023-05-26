@@ -1,10 +1,8 @@
-
 .body {
   background-image: url("../../city.jpg");
   background-size: cover;
   min-height: 100vh;
   position: relative;
-  
 }
 
 .registerContainer {
@@ -53,4 +51,8 @@
   height: 25px;
   width: 25px;
   float: left;
+}
+
+.error {
+  color: #9b1212;
 }

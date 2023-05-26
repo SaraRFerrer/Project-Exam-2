@@ -8,7 +8,9 @@ function Home() {
     <div>
       <div>
         <div className={styles.headerBanner}>
-          <h1 className={styles.header}>Find you accommodation at Holidaze!</h1>
+          <h1 className={styles.header}>
+            Find your accommodation at Holidaze!
+          </h1>
         </div>
       </div>
       <RecentVenues />
