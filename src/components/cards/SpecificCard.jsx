@@ -142,6 +142,7 @@ function SpecificCard(props) {
         });
         setBookingStatus(bookingStatus);
         alert("Venue is Booked");
+        window.location.reload();
       } else {
         alert("The venue is not available for the selected dates.");
       }
