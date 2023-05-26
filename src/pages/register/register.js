@@ -4,11 +4,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../../styles/register.module.css";
+import { useNavigate } from "react-router";
 
 function Register() {
   const [showAlert, setShowAlert] = useState(false);
   console.log(showAlert);
   const [venueManager, setVenueManager] = useState(false);
+  const navigate = useNavigate();
 
   const initialValues = {
     name: "",
@@ -47,6 +49,7 @@ function Register() {
           position: toast.POSITION.TOP_RIGHT,
         });
         console.error(data);
+        navigate("/");
       }
     } catch (error) {
       console.error(error);

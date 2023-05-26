@@ -66,12 +66,15 @@ footer {
   color: white;
 }
 
-.hamburger{
+.hamburger {
   z-index: 1;
   color: white;
-  
 }
 
 .hamburgerIcon {
   background-color: #747272;
+}
+
+.link {
+  text-decoration: none;
 }

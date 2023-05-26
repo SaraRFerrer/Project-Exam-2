@@ -48,7 +48,7 @@ function Venues() {
       <div className={styles.banner}>
         <div className={styles.searchContainer}>
           <h4 className={styles.searchHeading}>
-            Hotels, Aparments, Resorts, Houses and more ...
+            Hotels, Apartments, Resorts, Houses and more ...
           </h4>
           <div className={styles.searchWrapper}>
             <input

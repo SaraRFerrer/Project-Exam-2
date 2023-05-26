@@ -162,10 +162,21 @@ function SpecificCard(props) {
         ))}
       </Carousel>
       <div className={styles.heading}>
-        <h2 className={styles.h2}>{name}</h2>
-        <span className={`${styles.icon} ${styles.guests}`}>
-          <FaBed /> {maxGuests}
-        </span>
+        <div>
+          <h2 className={styles.h2}>{name}</h2>
+          <span className={`${styles.icon} ${styles.guests}`}>
+            <FaBed /> {maxGuests}
+          </span>
+        </div>
+        <div className={styles.host}>
+          <h3>Meet Your Host</h3>
+          <p className={styles.hostInfo}>
+            {owner.name} is this Venues Host and rents out this hospitable
+            accommadation for only ${price} per night. {name} is located in the
+            beautiful city of {location.city}. This accommodation offers an
+            unforgettible experience and is suitable for all ages.
+          </p>
+        </div>
       </div>
       <div className={styles.desContainer}>
         <p className={styles.des}>{description}</p>
