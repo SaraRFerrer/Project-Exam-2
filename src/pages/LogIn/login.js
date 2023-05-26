@@ -5,12 +5,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../../styles/login.module.css";
 import { Button, Modal } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 function LogIn() {
   const initialValues = { email: "", password: "" };
   const [showAlert, setShowAlert] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
     try {
@@ -33,8 +31,8 @@ function LogIn() {
           position: toast.POSITION.TOP_RIGHT,
         });
         setTimeout(() => {
-          window.location.reload();
-        }, 4000);
+          window.location.replace("/");
+        }, 2000);
       } else {
         toast.error("Invalid email or password", {
           position: toast.POSITION.TOP_RIGHT,
