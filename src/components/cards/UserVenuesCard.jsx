@@ -31,7 +31,7 @@ function VenuesCard(props) {
     <Card className={styles.card}>
       <div>
         <img src={media} alt="" className={styles.gridImg} />
-        <button className={styles.banner} onClick={handleEditClick}>
+        <button className={styles.manageBtn} onClick={handleEditClick}>
           Manage
         </button>
         <button className={styles.bookingsBtn} onClick={handleBookingsClick}>
