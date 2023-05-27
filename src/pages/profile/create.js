@@ -3,6 +3,7 @@ import { Modal, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/profile.module.css";
+import { useNavigate } from "react-router";
 
 function CreateVenue() {
   const [showModal, setShowModal] = useState(false);
@@ -23,6 +24,10 @@ function CreateVenue() {
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const today = new Date().toISOString().split("T")[0];
+  const navigate = useNavigate();
+  const refreshPage = () => {
+    navigate(0);
+  };
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -79,16 +84,17 @@ function CreateVenue() {
       const result = await response.json();
 
       console.log(result);
-      if (response.status === 201) {
+      if (response.ok) {
         alert("Venue created successfully!");
         setTimeout(() => {
-          window.location.replace("/profile");
+          refreshPage();
         }, 2000);
       }
     } catch (error) {
       console.error("There was a problem with the POST request:", error);
     }
   };
+
   if (user && user.venueManager) {
     return (
       <div>
