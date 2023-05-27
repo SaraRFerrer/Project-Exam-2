@@ -92,6 +92,7 @@ function Venues() {
                   id={venue.id}
                   price={venue.price}
                   maxGuests={venue.maxGuests}
+                  location={venue.location.city}
                 />
               </Col>
             );
