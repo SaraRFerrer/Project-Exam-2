@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const email = /^[\w\-.]+@(stud\.)?noroff\.no$/;
+const email = /^[\w\-.]+@(stud\.)noroff\.no$/;
 
 export const schemaReg = yup.object().shape({
   name: yup
@@ -10,7 +10,7 @@ export const schemaReg = yup.object().shape({
   email: yup
     .string()
     .required("Please enter your email address")
-    .matches(email, "please enter a valid Noroff.no email"),
+    .matches(email, "please enter a valid stud.noroff.no email"),
   avatar: yup.string().url("Avatar must be in url form"),
   password: yup
     .string()
