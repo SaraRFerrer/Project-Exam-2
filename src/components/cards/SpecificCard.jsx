@@ -143,15 +143,12 @@ function SpecificCard(props) {
         setBookingStatus(bookingStatus);
         alert("Venue is Booked");
         setTimeout(() => {
-          refreshPage();
+          navigate("/profile");
         }, 2000);
       } else {
         alert("The venue is not available for the selected dates.");
       }
     }
-    const refreshPage = () => {
-      navigate(0);
-    };
   }
 
   return (
