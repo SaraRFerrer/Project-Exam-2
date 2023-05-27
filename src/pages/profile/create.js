@@ -24,10 +24,8 @@ function CreateVenue() {
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
   const today = new Date().toISOString().split("T")[0];
+  const [venueId, setVenueId] = useState(null);
   const navigate = useNavigate();
-  const refreshPage = () => {
-    navigate(0);
-  };
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -83,12 +81,12 @@ function CreateVenue() {
 
       const result = await response.json();
 
-      console.log(result);
       if (response.ok) {
+        setVenueId(result.id);
         alert("Venue created successfully!");
-        setTimeout(() => {
-          refreshPage();
-        }, 2000);
+        if (result.id) {
+          navigate(`/specific/${result.id}`);
+        }
       }
     } catch (error) {
       console.error("There was a problem with the POST request:", error);
@@ -246,41 +244,46 @@ function CreateVenue() {
                   />
                 </Form.Group>
               </div>
+              <div className={styles.check}>
+                <Form.Group controlId="animals">
+                  <Form.Check
+                    className={styles.checkbox}
+                    type="checkbox"
+                    label="Pets allowed"
+                    checked={animals}
+                    onChange={(event) => setAnimals(event.target.checked)}
+                  />
+                </Form.Group>
 
-              <Form.Group className={styles.checkbox} controlId="animals">
-                <Form.Check
-                  type="checkbox"
-                  label="Pets allowed"
-                  checked={animals}
-                  onChange={(event) => setAnimals(event.target.checked)}
-                />
-              </Form.Group>
+                <Form.Group controlId="breakfast">
+                  <Form.Check
+                    className={styles.checkbox}
+                    type="checkbox"
+                    label="Breakfast"
+                    checked={breakfast}
+                    onChange={(event) => setBreakfast(event.target.checked)}
+                  />
+                </Form.Group>
 
-              <Form.Group className={styles.checkbox} controlId="breakfast">
-                <Form.Check
-                  type="checkbox"
-                  label="Breakfast"
-                  checked={breakfast}
-                  onChange={(event) => setBreakfast(event.target.checked)}
-                />
-              </Form.Group>
-
-              <Form.Group className={styles.checkbox} controlId="parking">
-                <Form.Check
-                  type="checkbox"
-                  label="Parking"
-                  checked={parking}
-                  onChange={(event) => setParking(event.target.checked)}
-                />
-              </Form.Group>
-              <Form.Group className={styles.checkbox} controlId="wifi">
-                <Form.Check
-                  type="checkbox"
-                  label="Wifi"
-                  checked={wifi}
-                  onChange={(event) => setWifi(event.target.checked)}
-                />
-              </Form.Group>
+                <Form.Group controlId="parking">
+                  <Form.Check
+                    className={styles.checkbox}
+                    type="checkbox"
+                    label="Parking"
+                    checked={parking}
+                    onChange={(event) => setParking(event.target.checked)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="wifi">
+                  <Form.Check
+                    className={styles.checkbox}
+                    type="checkbox"
+                    label="Wifi"
+                    checked={wifi}
+                    onChange={(event) => setWifi(event.target.checked)}
+                  />
+                </Form.Group>
+              </div>
             </Form>
             <Button onClick={handleSubmit}>Create Venue</Button>
           </Modal.Body>
