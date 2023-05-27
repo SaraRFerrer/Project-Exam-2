@@ -5,7 +5,7 @@ import { FaBed } from "react-icons/fa";
 import Card from "react-bootstrap/Card";
 
 function VenuesCard(props) {
-  const { id, media, maxGuests, price } = props;
+  const { id, media, maxGuests, price, location } = props;
 
   return (
     <Card className={styles.card}>
@@ -18,6 +18,7 @@ function VenuesCard(props) {
           <FaBed /> {maxGuests}
         </span>
         <p>$Per Night: {price}</p>
+        <p className={styles.location}>{location}</p>
       </div>
     </Card>
   );

@@ -22,6 +22,7 @@ function CreateVenue() {
   const [continent, setContinent] = useState("");
   const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
+  const today = new Date().toISOString().split("T")[0];
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -81,7 +82,7 @@ function CreateVenue() {
       if (response.status === 201) {
         alert("Venue created successfully!");
         setTimeout(() => {
-          window.location.reload();
+          window.location.replace("/profile");
         }, 2000);
       }
     } catch (error) {
@@ -170,6 +171,7 @@ function CreateVenue() {
                     Available from:
                     <input
                       type="date"
+                      min={today}
                       value={dateFrom}
                       onChange={(event) => setDateFrom(event.target.value)}
                     />
@@ -181,6 +183,7 @@ function CreateVenue() {
                     <input
                       type="date"
                       value={dateTo}
+                      min={today}
                       onChange={(event) => setDateTo(event.target.value)}
                     />
                   </label>
@@ -238,7 +241,7 @@ function CreateVenue() {
                 </Form.Group>
               </div>
 
-              <Form.Group controlId="animals">
+              <Form.Group className={styles.checkbox} controlId="animals">
                 <Form.Check
                   type="checkbox"
                   label="Pets allowed"
@@ -247,7 +250,7 @@ function CreateVenue() {
                 />
               </Form.Group>
 
-              <Form.Group controlId="breakfast">
+              <Form.Group className={styles.checkbox} controlId="breakfast">
                 <Form.Check
                   type="checkbox"
                   label="Breakfast"
@@ -256,7 +259,7 @@ function CreateVenue() {
                 />
               </Form.Group>
 
-              <Form.Group controlId="parking">
+              <Form.Group className={styles.checkbox} controlId="parking">
                 <Form.Check
                   type="checkbox"
                   label="Parking"
@@ -264,7 +267,7 @@ function CreateVenue() {
                   onChange={(event) => setParking(event.target.checked)}
                 />
               </Form.Group>
-              <Form.Group controlId="wifi">
+              <Form.Group className={styles.checkbox} controlId="wifi">
                 <Form.Check
                   type="checkbox"
                   label="Wifi"
