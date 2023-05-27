@@ -4,7 +4,6 @@ import { Modal, Nav, Navbar } from "react-bootstrap";
 import LogIn from "../pages/LogIn/login";
 import { UserContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
-import LoginModal from "./LoginModal";
 
 function CustomNavbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);

@@ -142,11 +142,16 @@ function SpecificCard(props) {
         });
         setBookingStatus(bookingStatus);
         alert("Venue is Booked");
-        window.location.reload();
+        setTimeout(() => {
+          refreshPage();
+        }, 2000);
       } else {
         alert("The venue is not available for the selected dates.");
       }
     }
+    const refreshPage = () => {
+      navigate(0);
+    };
   }
 
   return (
