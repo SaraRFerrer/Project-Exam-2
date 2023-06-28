@@ -14,7 +14,7 @@
 
 .banner {
   background-image: url("../../profileBanner.jpg");
-  background-repeat: no-repeat;
+  
   min-height: 50vh;
   width: 100%;
   object-fit: cover;
